@@ -9,8 +9,10 @@ import { fileURLToPath } from 'url'
 const app = express()
 
 // Resolve the absolute path to this server.js file.
+//converts module path to useable OS path
 const __filename = fileURLToPath(import.meta.url)
 // Resolve the directory that contains this file; used for building other paths.
+//regularizes paths no matter the directory
 const __dirname = path.dirname(__filename)
 
 // Serve static files (HTML, JS, CSS) from the "public" folder at the web root.
@@ -37,18 +39,12 @@ app.get('/notes', (req, res) => {
 app.get('/notes/:id', (req, res) => {
   // Send back the note stored at the requested index.
   res.json(notes[req.params.id])
-  // Log the note content to the server console for debugging.
-  console.log(notes[req.params.id])
-  // Log the id that was requested (index as a string).
-  console.log(req.params.id)
 })
 
 // Add note: body contains { content }. Push to array and return updated notes.
 app.post('/notes', (req, res) => {
   // Push the new note text from the request body into our array.
   notes.push(req.body.content)
-  // Log the new note text for debugging/visibility.
-  console.log(req.body.content)
   // Return the full updated notes array so the client can re-render.
   res.json(notes)
 })

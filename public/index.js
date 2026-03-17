@@ -54,6 +54,7 @@ function renderNotes(notes) {
 }
 
 // Escape arbitrary text so it is safe to insert into innerHTML.
+//if a user enter valid html in the input it won't affect the acual code
 function escapeHtml(text) {
   // Create a temporary <div> element in memory.
   const div = document.createElement('div')
